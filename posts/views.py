@@ -7,6 +7,7 @@ from .models import Post, Comment
 from .forms import CommentForm, UploadForm
 
 def PostView(request):
+    # In order to test the pagination, i'll set a post limit for each page. 2 posts each page
     posts = Post.objects.order_by('-published')
     tag = Post.tags.all()
     paginator = Paginator(posts, 2)
@@ -42,12 +43,16 @@ def DetailView(request, post_id):
 def TagView(request, tags):
     tags = Tag.objects.filter(slug=tags).values_list('name', flat=True)
     posts = Post.objects.filter(tags__name__in=tags)
+    paginator = Paginator(posts, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     tag_name = []
-    for post in posts:
+    for post in page_obj:
         for tag in post.tags.all():
             if tag in tag_name:
                 pass
             else:
                 tag_name.append(tag)
 
-    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name })
+    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name, 'page_obj':page_obj})
