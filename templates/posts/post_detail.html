@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %} {% block body_block %} {% load static %}
+
+{% block sidebar %}
+
+{% include 'main/sidebar.html' %}
+{% load taggit_templatetags2_tags %}
+
+{% endblock sidebar %}
+
+{% block content %}
+
+<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" style="max-width: 200px; max-height: 200px"></a>
+
+{% endblock content %}
+{% endblock body_block %}

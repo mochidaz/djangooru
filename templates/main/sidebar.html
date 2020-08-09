@@ -1,0 +1,35 @@
+{% block sidebar %}
+
+<div class="sidebar-container">
+    <aside id="sidebar">
+        <section id="search-box">
+            <h2>Search</h2>
+            <form id="search-box-form" action="{{ results }}" accept-charset="UTF-8" method="GET">
+                <input id="tags" class="ui-autocomplete-input" type="text" name="tags" data-shortcut="q"
+                    data-autocomplete="tag-query" autocomplete="off" title="Shortcut is q">
+                <button id="search-box-submit" type="submit">
+                    <i class="fas fa-search"
+                        ::before
+                    </i>
+                </button>
+            </form>
+        </section>
+
+{% load taggit_templatetags2_tags %}
+<section id="tag-box">
+    <h2>Tags</h2>
+    <ul>
+        {% get_taglist as tags for 'posts.Post:tags' %}
+        {% for things in tags %}
+        {% for shits in tag %}
+        {% if things == shits or things in shits %}
+        <li>
+            <a id="tag" method="GET" href="{% url 'tag_detail' things %}">{{ things }}</a> {{ things.num_times }}
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock sidebar %}

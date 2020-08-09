@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block body_block %}
+{% endblock body_block %}
+
+{% block sidebar %}
+
+{% include 'main/sidebar.html' %}
+
+{% endblock sidebar %}
+
+{% block content %}
+{% for post in posts %}
+<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" style="max-width: 200px; max-height: 200px"></a>
+{% endfor %}
+{% endblock content %}

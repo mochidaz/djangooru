@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block sidebar %}
+{% include 'main/sidebar.html' %}
+{% endblock sidebar %}
+
+{% block content %}
+
+<style>
+.row {
+    display:flex;
+}
+</style>
+
+{% for post in page_obj %}
+    <a href="{% url 'post_detail' post.post_id  %}">
+            <img src="{{ post.image.url }}" alt="img" style="max-height: 300px; max-width: 300px">
+    </a>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock content %}

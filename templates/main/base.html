@@ -1,0 +1,40 @@
+{% load static %}
+    <style>
+        header#top menu {
+    margin-top: -2px;
+    background: #f5f5ff;
+    background: var(--subnav-menu-background-color);
+    padding: 6px 20px;
+}
+    </style>
+
+<header id="top">
+    <nav id="nav">
+        <menu id="main-menu" class="main">
+        <h2>
+            <a href="{% url 'index' %}">Danbooru Django</a>
+        </h2>
+        <ul>
+        {% if user.is_active %}
+        <li>
+        <a href"#">My Account</a>
+        </li>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <li>
+        <a href="{% url 'login' %}">Login</a>
+        </li>
+        <li>
+        <a href="{% url 'register' %}">Register</a>
+        </li>
+        {% endif %}
+
+        </ul>
+    </nav>
+</header>
+
+{% block sidebar %}
+
+{% endblock sidebar %}
+{% block content %}
+{% endblock content %}
