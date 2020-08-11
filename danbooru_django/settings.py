@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'XXXX'
+SECRET_KEY = 't236@wer4o8=*4j95)x-%d8(#$!ujhvlktl6^y-w3#xk1um^op'
 
 DEBUG = True
 
@@ -59,8 +59,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'danboorudb',
-        'USER': 'XXXX',
-        'PASSWORD': 'XXXX',
+        'USER': 'rahman',
+        'PASSWORD': 'AlMulk78',
     }
 }
 

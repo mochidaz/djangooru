@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" style="max-width: 200px; max-height: 200px"></a>
+<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" style="max-width: 800; max-height: 800; mix-width: 500; min-height: 500;"></a>
 
 {% endblock content %}
 {% endblock body_block %}
