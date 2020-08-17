@@ -4,8 +4,8 @@
     <aside id="sidebar">
         <section id="search-box">
             <h2>Search</h2>
-            <form id="search-box-form" accept-charset="UTF-8" method="GET">
-                <input id="tags" class="ui-autocomplete-input" type="text" name="q" data-shortcut="q" title="Shortcut is q">
+            <form id="search-box-form" accept-charset="UTF-8" method="GET", action={% url 'posts' %}>
+                <input id="tags" class="ui-autocomplete-input" type="text" name="tags" data-shortcut="q" title="Shortcut is q">
                 <button id="search-box-submit" type="submit">
                     <i class="fas fa-search"
                         ::before

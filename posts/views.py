@@ -1,39 +1,76 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from taggit.models import Tag
 from django.db.models import Q, Count
+from django.views.generic import ListView, TemplateView
 from django.core.paginator import Paginator
 
 from .models import Post, Comment
 from .forms import CommentForm, UploadForm
 
+def check_duplicate(post):
+    look_for_duplicate = []
+    for i in post:
+        if i in look_for_duplicate:
+            pass
+        else:
+            look_for_duplicate.append(i)
+    return look_for_duplicate
 
-def PostView(request):
+class IndexView(ListView):
+    model = Post
+    paginate_by = 3
+    results = model.objects.order_by('-published')
+    template_name = 'main/index.html'
+    
     # In order to test the pagination, i'll set a post limit for each page. 2 posts each page
-    query = request.GET.get('q')
-    if query:
-        posts = Post.objects.filter(Q(tags__name__in=query.split(' '))).order_by('-published')
-        look_for_duplicate = []
-        for i in posts:
-            if i in look_for_duplicate:
-                pass
-            else:
-                look_for_duplicate.append(i)
+    def get_queryset(self):
+        self.q = self.request.GET.get('q')
+        if self.q:
+            self.results = Post.objects.filter(tags__name__in=self.q.split(' '))
+            self.results = check_duplicate(self.results)
+        return self.results
 
-        posts = look_for_duplicate
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(results=self.results, **kwargs)
+        paginator = Paginator(self.results, self.paginate_by)
+        page = self.request.GET.get('page')
+        page_obj = paginator.get_page(page)
+        tags = []
+        for t in page_obj:
+            for tag in t.tags.all():
+                if tag not in tags:
+                    tags.append(tag)
+        context['tag'] = tags
+        context['q'] = self.q
+        return context
 
-    else:
-        posts = Post.objects.order_by('-published')
+class PostView(ListView):
+    model = Post
+    paginate_by = 3
+    results = model.objects.order_by('-published')
+    template_name = 'main/index.html'
+    
+    # In order to test the pagination, i'll set a post limit for each page. 2 posts each page
+    def get_queryset(self):
+        self.q = self.request.GET.get('tags')
+        if self.q:
+            self.results = Post.objects.filter(tags__name__in=self.q.split(' '))
+            self.results = check_duplicate(self.results)
+        return self.results
 
-    paginator = Paginator(posts, 2)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    tags = []
-    for t in page_obj:
-        for tag in t.tags.all():
-            if tag not in tags:
-                tags.append(tag)
-
-    return render(request, 'main/index.html', {'posts':posts, 'page_obj':page_obj, 'tag':tags, 'query':query})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(results=self.results, **kwargs)
+        paginator = Paginator(self.results, self.paginate_by)
+        page = self.request.GET.get('page')
+        page_obj = paginator.get_page(page)
+        tags = []
+        for t in page_obj:
+            for tag in t.tags.all():
+                if tag not in tags:
+                    tags.append(tag)
+        context['tag'] = tags
+        context['q'] = self.q
+        return context
 
 def DetailView(request, post_id):
     
@@ -54,11 +91,13 @@ def DetailView(request, post_id):
             comment_form = CommentForm()
     else:
         comment_form = CommentForm()
+    detail = True
 
     return render(request, 'posts/post_detail.html', {'post':post, 'tag':tags, 'comments':comments, 'new_comment':
-                                                        new_comment, 'comment_form':comment_form})
+                                                        new_comment, 'comment_form':comment_form, 'detail':detail})
 
 def TagView(request, tags):
+    q = request.GET.get('tags')
     tags = Tag.objects.filter(slug=tags).values_list('name', flat=True)
     posts = Post.objects.filter(tags__name__in=tags)
     paginator = Paginator(posts, 2)
@@ -72,5 +111,6 @@ def TagView(request, tags):
                 pass
             else:
                 tag_name.append(tag)
+    tag_view = True
 
-    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name, 'page_obj':page_obj})
+    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name, 'page_obj':page_obj, 'tag_view': tag_view})
