@@ -24,7 +24,7 @@
     {% if q %}
         {% if page_obj.has_previous %}
             <a href="?tags={{ q }}&page=">&laquo; first</a>
-            <a href="?tags={{ query }}&page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?tags={{ q }}&page={{ page_obj.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
