@@ -12,7 +12,7 @@ Danbooru-like taggable image board written in django
 8. run `python manage.py runserver`
 
 ## TO-DOs
-- Make the tags query params, not paths
+- ~~Make the tags query params, not paths~~ (Actually both)
 - ~~Make the search bar works~~
-- Make the search bar works __Globally__
+- ~~Make the search bar works __Globally__~~
 - Create better design (I'd be really happy if someone could contribute to this)
