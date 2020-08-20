@@ -1,3 +1,4 @@
 .vscode
 img
 __pycache__
+migrations
