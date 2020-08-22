@@ -1,0 +1,11 @@
+{% block sidebar2 %}
+<div>
+    <ul>
+	    <h3>Information</h3>
+	    <p>ID: {{ post.post_id }}</p>
+	    <p>Uploader: <a href="{% url 'dashboard' post.uploader.id %}">{{ post.uploader.username }}</a></p>
+	    <p>Artist: {{ post.artist }}</p>
+	    <p>Source: {{ post.source }}</p>
+    </ul>
+</div>
+{% endblock sidebar2 %}

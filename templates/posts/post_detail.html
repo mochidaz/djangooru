@@ -3,10 +3,14 @@
 {% block sidebar %}
 
 {% include 'main/sidebar.html' %}
-{% load taggit_templatetags2_tags %}
 
 {% endblock sidebar %}
 
+{% block sidebar2 %}
+{% include 'main/sidebar2.html' %}
+{% endblock sidebar2 %}
+
+{% load taggit_templatetags2_tags %}
 {% block content %}
 
 <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" style="max-width: 800; max-height: 800; mix-width: 500; min-height: 500;"></a>
