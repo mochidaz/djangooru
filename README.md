@@ -8,7 +8,7 @@ Danbooru-like taggable image board written in django
 4. Create media directory
 5. Create new psql db
 6. Set the db in `settings.py`
-7. run `python manage.py migrate`
+7. run `python manage.py migrate` (If migrate doesn't work, create migrations folder with __init__.py in accounts and posts directory and run `python manage.py makemigrations` then run migrate again)
 8. run `python manage.py runserver`
 
 ## TO-DOs
