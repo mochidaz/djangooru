@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from taggit.models import Tag
 from django.db.models import Q, Count
 from django.views.generic import ListView, TemplateView
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from taggit.models import Tag
 
 from .models import Post, Comment
 from .forms import CommentForm, UploadForm
@@ -90,6 +92,24 @@ def TagView(request, tags):
 
     tag_name = filter_tags(page_obj)
 
-    tag_view = True
+    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name, 'page_obj':page_obj, 'q':q})
 
-    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name, 'page_obj':page_obj, 'tag_view': tag_view})
+
+@login_required
+def upload_view(request):
+    uploaded = False
+    template_name = 'posts/upload.html'
+    if request.method == 'POST':
+        upload_form = UploadForm(request.POST, request.FILES)
+        if upload_form.is_valid():
+            upload_form = upload_form.save()
+            uploaded = True
+        else:
+            print(upload_form.errors)
+            return HttpResponse('Invalid post details')
+    else:
+        upload_form = UploadForm()
+    return render(request, template_name, {
+        'upload_form':upload_form,
+        'uploaded':uploaded,
+    })

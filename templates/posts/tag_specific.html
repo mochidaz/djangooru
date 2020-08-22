@@ -12,12 +12,8 @@
 {% block content %}
 
 {% for post in page_obj %}
-{% if from_query %}
-    <a href="{% url 'post_detail' post.post_id  %}?tag={{ q }}">
-{% else %}
-    <a href="{% url 'post_detail' post.post_id  %}">
-{% endif %}            
-    <img src="{{ post.image.url }}" alt="img" style="max-height: 300px; max-width: 300px">
+<a href="{% url 'post_detail' post.post_id  %}?tag={{ q }}">
+	<img src="{{ post.image.url }}" alt="img" style="max-height: 300px; max-width: 300px">
     </a>
 {% endfor %}
 

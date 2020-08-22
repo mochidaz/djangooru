@@ -9,7 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
     path('posts/', include('posts.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('users/', include('accounts.urls')),
+    #path('tags/', TagList, name="taglist"),
     path('tags/<tags>', TagView, name='tag_detail'),
 ]
 

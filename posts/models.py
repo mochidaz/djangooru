@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django_userforeignkey.models.fields import UserForeignKey
 from taggit.managers import TaggableManager
 
+
 class Post(models.Model):
     uploader = UserForeignKey(auto_user_add=True)
     artist = models.CharField(default="", max_length=100)

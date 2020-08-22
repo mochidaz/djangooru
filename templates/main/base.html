@@ -16,9 +16,7 @@
         </h2>
         <ul>
         {% if user.is_active %}
-        <li>
-        <a href"#">My Account</a>
-        </li>
+	<a href="{% url 'dashboard' user.id %}">My Account</a>
         <a href="{% url 'logout' %}">Logout</a>
         {% else %}
         <li>

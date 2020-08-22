@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% for post in posts %}
+<div>
+	<h2>User {{ post.uploader }}</h2>
+	<p>ID: {{ post.uploader.id }}</p>
+</div>
+<div>
+<img src={{ post.image.url }} style="max-height:300px; max-width:300px;">
+</div>
+{% endfor %}
+
+{% endblock %}

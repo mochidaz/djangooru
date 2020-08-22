@@ -23,7 +23,7 @@
         {% for shits in tag %}
         {% if things == shits %}
         <li>
-            <a id="tag" method="GET" href="{% url 'tag_detail' things %}">{{ things }}</a> {{ things.num_times }}
+		<a id="tag" method="GET" name="tags" href="{% url 'posts' %}?tags={{ things }}">{{ things }}</a> {{ things.num_times }}
         </li>
         {% endif %}
         {% endfor %}
