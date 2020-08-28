@@ -4,15 +4,17 @@
 
 {% include 'main/sidebar.html' %}
 
-{% include 'main/sidebar2.html' %}
 {% endblock sidebar %}
 
 
+<!-- Post -->>
 {% load taggit_templatetags2_tags %}
 {% block content %}
+<p>Image is resized. <a href="{{ post.image.url }}">View original</a></p>
+<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" style="max-height:900px; max-width:900px;"></a>
+<!-- End of Post -->
 
-<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" class="detail-img"></a>
-
+<!-- Pagination -->
 <div class="pagination">
     <span class="step-links">
 
@@ -44,5 +46,8 @@
 
     </span>
 </div>
+<!-- End of Pagination -->
+
+
 {% endblock content %}
 {% endblock body_block %}

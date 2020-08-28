@@ -38,10 +38,15 @@ class PostView(ListView):
     # In order to test the pagination, i'll set a post limit for each page. 3 posts each page
     def get_queryset(self):
         self.q = self.request.GET.get('tags')
+        self.q2 = self.request.GET.get('user')
         if self.q:
             self.results = Post.objects.all()
             for tag in self.q.split(' '): 
                 self.results = self.results.filter(tags__name=tag)
+
+        if self.q2:
+            self.results = Post.objects.all()
+            self.results = self.results.filter(uploader__id=self.q2)
 
             self.results = check_duplicate(self.results)
 
@@ -75,7 +80,7 @@ def DetailView(request, post_id):
 
 
     # Comment is ready. You only need to call it in the template
-    comments = post.comments
+    comments = post.comments.all()
     new_comment = None
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)

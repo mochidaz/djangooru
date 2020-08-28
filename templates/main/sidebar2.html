@@ -1,9 +1,15 @@
-<div>
-    <ul>
-	    <h3>Information</h3>
-	    <p>ID: {{ post.post_id }}</p>
-	    <p>Uploader: <a href="{% url 'dashboard' post.uploader.id %}">{{ post.uploader.username }}</a></p>
-	    <p>Artist: {{ post.artist }}</p>
-	    <p>Source: {{ post.source }}</p>
-    </ul>
-</div>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <!-- Sidebar Content -->
+        <div class="sidebar-content">
+            <ul class="status-place">
+                <h2 class="stat-title"><b>User Status</b></h2>
+		<li class="u-stat no-list-style"><p>User ID: <b class="u-stat-item">{{ user.id }}</b></p></li>
+		<li class="u-stat no-list-style"><p>Join Date: <b class="u-stat-item">{{ user.date_joined }}</b></p></li>
+		<li class="u-stat no-list-style"><p>Posts: <b class="u-stat-item">{{ posts.count }}</b></p></li>
+                <li class="u-stat no-list-style"><p>Comments: <b class="u-stat-item">10</b></p></li>
+            </ul>
+        </div>
+        <!-- End of Sidebar Content -->
+    </div>
+  <!-- End of Sidebar -->

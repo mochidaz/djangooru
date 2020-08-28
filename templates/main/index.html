@@ -8,16 +8,17 @@
 
 {% block content %}
 
-  <!-- Awal Konten -->
+  <!-- Content -->
 
-  <a href="{% url 'index' %}"> <h3>Posts </h3></a>
+  <a href="{% url 'index' %}"><h3>Posts</h3></a>
   <div class="bg-light content" id="content">
 	  {% for post in page_obj %}
     <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
     {% endfor %}
   </div>
-  <!-- Akhir konten -->
+  <!-- End of content -->
 
+  <!-- Pagination -->
 <div class="container pag text-center">
 <h4 class="pagination-title">Pagination</h4>
 <div class="pagination">
@@ -54,7 +55,7 @@
     </span>
 </div>
 </div>
-<!-- Akhir Pagination -->
+<!-- End of Pagination -->
 
 
 {% endblock content %}

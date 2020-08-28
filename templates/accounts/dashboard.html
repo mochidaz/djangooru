@@ -1,16 +1,15 @@
 {% extends 'main/base.html' %}
 
+{% block sidebar %}
+{% include 'main/sidebar2.html' %}
+{% endblock sidebar %}
+
 {% block content %}
-<div>
-	<h2>User {{ user.username }}</h2>
-	<p>ID: {{ user.id }}</p>
-</div>
 
-<div>
-<h1> Posts ( {{ posts.count }} )</h1>
-{% for post in posts %}
-<a href={% url 'post_detail' post.post_id %}><img src={{ post.image.url }} style="max-height:300px; max-width:300px;"></a>
-{% endfor %}
-</div>
-
-{% endblock %}
+<a href="{% url 'posts' %}?user={{ user.id  }}"> <h3>Posts</h3></a>
+  <div class="bg-light content" id="content">
+          {% for post in posts|slice:"5" %}
+    <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
+    {% endfor %}
+  </div>
+  {% endblock %}

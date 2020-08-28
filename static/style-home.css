@@ -3,6 +3,11 @@ body {
     background: #f8f9fa !important;
 }
 
+.detail-img{
+    max-height:500px;
+    max-width:500px;
+}
+
 .nav-item {
     font-size: 20px;
     padding-left: 45px;
