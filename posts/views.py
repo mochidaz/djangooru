@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
 from django.db.models import Q, Count
 from django.views.generic import ListView, TemplateView
 from django.core.paginator import Paginator
@@ -13,7 +13,7 @@ from .utils import check_duplicate, filter_tags
 
 class IndexView(ListView):
     model = Post
-    paginate_by = 3
+    paginate_by = 15
     results = model.objects.order_by('-published')
     template_name = 'main/index.html'
     
@@ -31,7 +31,7 @@ class IndexView(ListView):
 
 class PostView(ListView):
     model = Post
-    paginate_by = 3
+    paginate_by = 15
     results = model.objects.order_by('-published')
     template_name = 'main/index.html'
     
@@ -60,10 +60,19 @@ class PostView(ListView):
 
 def DetailView(request, post_id):
     
-    post = get_object_or_404(Post, post_id=post_id)
+    q = request.GET.get('tags')
+    if q:
+        for tag in q.split(' '):
+            posts = Post.objects.filter(tags__name=tag)
+
+        iterator = iter(posts)
+        post = get_object_or_404(posts, post_id=iterator.post_id)
+    else:
+        post = get_object_or_404(Post, post_id=post_id)
     tags = []
     for t in post.tags.all():
         tags.append(t)
+
 
     # Comment is ready. You only need to call it in the template
     comments = post.comments
@@ -77,10 +86,16 @@ def DetailView(request, post_id):
             comment_form = CommentForm()
     else:
         comment_form = CommentForm()
-    detail = True
+    
+    #if q:
+     #   for tag in q.split(' '):
+      #      posts = Post.objects.all().filter(tags__name=tag)
 
-    return render(request, 'posts/post_detail.html', {'post':post, 'tag':tags, 'comments':comments, 'new_comment':
-                                                        new_comment, 'comment_form':comment_form, 'detail':detail})
+       # context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q, 'posts':posts}
+
+    context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q}
+
+    return render(request, 'posts/post_detail.html', context)
 
 def TagView(request, tags):
     q = request.GET.get('tags')
@@ -92,7 +107,7 @@ def TagView(request, tags):
 
     tag_name = filter_tags(page_obj)
 
-    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name, 'page_obj':page_obj, 'q':q})
+    return render(request, 'posts/tag_specific.html', {'posts':posts, 'tag':tag_name, 'page_obj':page_obj, 'q':q })
 
 
 @login_required

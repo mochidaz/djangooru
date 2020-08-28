@@ -1,34 +1,37 @@
 {% block sidebar %}
 
-<div class="sidebar-container">
-    <aside id="sidebar">
-        <section id="search-box">
-            <h2>Search</h2>
-            <form id="search-box-form" accept-charset="UTF-8" method="GET", action={% url 'posts' %}>
-                <input id="tags" class="ui-autocomplete-input" type="text" name="tags" data-shortcut="q" title="Shortcut is q">
-                <button id="search-box-submit" type="submit">
-                    <i class="fas fa-search"
-                        ::before
-                    </i>
-                </button>
-            </form>
-        </section>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
 
-{% load taggit_templatetags2_tags %}
-<section id="tag-box">
-    <h2>Tags</h2>
-    <ul>
+  <h3 style="padding:30px;padding-top:9px; padding-bottom:5px;"><b>Search</b></h3>
+    <!-- Sidebar Content (Tags dan Search) -->
+    <div class="sidebar-content">
+      <!-- Search form -->
+      <nav class="navbar navbar-light">
+        <form class="form-inline" method="GET", action={% url 'posts' %}>
+          <input class="form-control mr-lg-2" type="search" placeholder="Search Artist or Artwork by Tag" aria-label="Search" name="tags">
+          <button class="search-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+      </nav>
+      <!-- Akhir Search form -->
+      {% load taggit_templatetags2_tags %}
+      <!-- Tags -->
+      <ul class="tag-place">
+        <h2><b>Tags</b></h2>
         {% get_taglist as tags for 'posts.Post:tags' %}
         {% for things in tags %}
         {% for shits in tag %}
         {% if things == shits %}
-        <li>
-		<a id="tag" method="GET" name="tags" href="{% url 'posts' %}?tags={{ things }}">{{ things }}</a> {{ things.num_times }}
+        <li class="no-list-style">
+		<a id="tag" method="GET" name="tags" href="{% url 'posts' %}?tags={{ things }}"><i class="fa fa-tag tag-icon" aria-hidden="true"></i>{{ things }}</a> {{ things.num_times }}
         </li>
         {% endif %}
         {% endfor %}
         {% endfor %}
-    </ul>
-</section>
-
-{% endblock sidebar %}
+      </ul>
+      <!-- Akhir Tags -->
+    </div>
+    <!-- Akhir Sidebar Content -->
+  </div>
+  <!-- Akhir Sidebar -->
+ {% endblock %}

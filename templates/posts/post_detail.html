@@ -4,48 +4,44 @@
 
 {% include 'main/sidebar.html' %}
 
+{% include 'main/sidebar2.html' %}
 {% endblock sidebar %}
 
-{% block sidebar2 %}
-{% include 'main/sidebar2.html' %}
-{% endblock sidebar2 %}
 
 {% load taggit_templatetags2_tags %}
 {% block content %}
 
-<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" style="max-width: 800; max-height: 800; mix-width: 500; min-height: 500;"></a>
+<a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" class="detail-img"></a>
 
 <div class="pagination">
     <span class="step-links">
-    {% if q %}
-        {% if page_obj.has_previous %}
-            <a href="?page=&tags={{ q }}">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}&tags={{ q }}">previous</a>
-        {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+	<ul class="pager">
+		{% if q %}
+{% if post.get_next_by_published %}
+    <li class="previous">
+	    <a href="{% url 'post_detail' post.get_next_by_published.post_id %}?tags={{ q }}">&larr;Next Post</a>
+            </li>
+        {% endif %}
+        {% if post.get_previous_by_published %}
+            <li class="next">
+		    <a href="{% url 'post_detail' post.get_previous_by_published.post_id %}?tags={{ q }}">Previous Post&rarr;</a>
+            </li>
+        {% endif %}
+	{% else %}
+{% if post.get_next_by_published %}
+    <li class="previous">
+                 <a href="{% url 'post_detail' post.get_next_by_published.post_id %}">&larr;Next Post</a>
+            </li>
+        {% endif %}
+        {% if post.get_previous_by_published %}
+            <li class="next">
+                 <a href="{% url 'post_detail' post.get_previous_by_published.post_id %}">Previous Post&rarr;</a>
+            </li>
+        {% endif %}
+	{% endif %}
+    </ul>
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&tags={{ q }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}&tags={{ q }}">last &raquo;</a>
-        {% endif %}
-        {% else %}
-                {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-        {% endif %}
     </span>
 </div>
 {% endblock content %}

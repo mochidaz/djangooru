@@ -1,41 +1,47 @@
 {% load static %}
-    <style>
-        header#top menu {
-    margin-top: -2px;
-    background: #f5f5ff;
-    background: var(--subnav-menu-background-color);
-    padding: 6px 20px;
-}
-    </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-<header id="top">
-    <nav id="nav">
-        <menu id="main-menu" class="main">
-        <h2>
-            <a href="{% url 'index' %}">Danbooru Django</a>
-        </h2>
-        <ul>
-        {% if user.is_active %}
-	<a href="{% url 'dashboard' user.id %}">My Account</a>
-	<a href="{% url 'upload' %}">Upload</a>
-        <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-        <li>
-        <a href="{% url 'login' %}">Login</a>
-        </li>
-        <li>
-        <a href="{% url 'register' %}">Register</a>
-        </li>
-        {% endif %}
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="{% static 'style-home.css' %}">
+    
+    <!-- Font (Google Font) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">
 
-        </ul>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>@Mochida Design</title>
+</head>
+<body>
+  <div class="z-index-2">
+    <!-- Awal Navbar -->
+    <nav class="navbar top-navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1">Djangooru</span>
     </nav>
-</header>
 
+    <nav class="navbar bottom-navbar navbar-expand-lg navbar-light">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+		<a class="nav-item nav-link active nav-active" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
+		<a class="nav-item nav-link" href="{% url 'index' %}">Posts</a>
+          <a class="nav-item nav-link" href="#">Popular</a>
+	  {% if user.is_active %}
+	  <a class="nav-item nav-link" href="{% url 'upload' %}">Upload</a>
+	  <a class="nav-item nav-link" href="{% url 'dashboard' user.id %}">Account Settings</a>
+	  {% else %}	
+          <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+          <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
+	  {% endif %}
+        </div>
+      </div>
+    </nav>
 {% block sidebar %}
-
 {% endblock sidebar %}
-{% block sidebar2 %}
-{% endblock sidebar2 %}
 {% block content %}
 {% endblock content %}
