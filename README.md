@@ -15,5 +15,5 @@ Danbooru-like taggable image board written in django
 - ~~Make the tags query params, not paths~~ (Actually both)
 - ~~Make the search bar works~~
 - ~~Make the search bar works __Globally__~~
-- ~~Create better design (I'd be really happy if someone could contribute to this)~~ (Almost done thanks to [this guy](https://github.com/DaNoobBoii]) :)
+- ~~Create better design (I'd be really happy if someone could contribute to this)~~ (Almost done thanks to [this guy](https://github.com/DaNoobBoii) :) )
 - Make next/before on post detail works with tags
