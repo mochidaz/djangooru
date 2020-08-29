@@ -1,0 +1,276 @@
+body {
+    overflow-x: hidden;
+    background: #f8f9fa !important;
+}
+
+.nav-item {
+    font-size: 20px;
+    padding-left: 45px;
+}
+
+.navbar-brand {
+    font-size: 32px !important;
+    font-family: Poppins;
+}
+
+.bottom-navbar {
+    background: lightblue;
+}
+
+.sidebar {
+    background: #f7f5fa;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    float: left;
+    bottom: 0;
+    justify-content: center;
+    text-align: center;
+}
+
+.sidebar-content {
+    padding: 0;
+    margin: 0;
+}
+
+.no-list-style {
+    list-style-type: none;
+}
+
+.staus-place {
+    padding: 15px;
+    padding-bottom: 80px;
+}
+
+.sidebar-content h2 {
+    padding: 10px 20px;
+}
+
+.stat-title {
+    padding: 25px 0 !important;
+}
+
+.u-stat-item {
+    padding: 0 10px;
+}
+
+#content {
+    float: none;
+    padding: 25px 50px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 275px 275px;
+    grid-template-rows: 400px 400px 400px 400px 400px;
+    grid-gap: 10px;
+    padding-bottom: 250px !important;
+}
+
+.item-landscape {
+    max-width: 275px;
+    max-height: 400px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-potrait {
+    max-width: 275px;
+    max-height: 400px;
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+.img-section {
+    background: none;
+}
+
+.user-avatar {
+    border-radius: 50%;
+    padding: 25px 0;
+    width: 50px;
+}
+
+.post {
+    padding: 10px 0;
+    font-family: Poppins;
+}
+
+#content-favorite {
+    float: right;
+    padding: 0 25px;
+}
+
+.content-favorite {
+    display: grid;
+    grid-template-columns: 275px 275px;
+    grid-template-rows: 400px 400px 400px 400px 400px;
+    grid-gap: 10px;
+    padding-bottom: 250px !important;
+}
+
+.item-landscape {
+    max-width: 275px;
+    max-height: 400px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-potrait {
+    max-width: 275px;
+    max-height: 400px;
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+.img-section {
+    background: none;
+}
+
+.post-fav {
+    padding: 10px 0;
+    font-family: Poppins;
+}
+
+@media (min-width: 992px) {
+    body {
+        overflow-x: hidden;
+        background: #f8f9fa !important;
+    }
+    
+    .nav-item {
+        font-size: 20px;
+        padding-left: 45px;
+    }
+    
+    .navbar-brand {
+        font-size: 32px !important;
+        font-family: Poppins;
+    }
+    
+    .bottom-navbar {
+        background: lightblue;
+    }
+    
+    .sidebar {
+        background: #f7f5fa;
+        position: relative;
+        display: flex;
+        width: 300px;
+        height: 100%;
+        float: left;
+        bottom: 0;
+    }
+    
+    .sidebar-content {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .no-list-style {
+        list-style-type: none;
+    }
+    
+    .staus-place {
+        padding: 15px;
+        padding-bottom: 80px;
+    }
+    
+    .sidebar-content h2 {
+        padding: 10px 20px;
+    }
+    
+    .stat-title {
+        padding: 25px 0 !important;
+    }
+    
+    .u-stat-item {
+        padding: 0 10px;
+    }
+    
+    #content {
+        float: right;
+        padding: 0 25px;
+    }
+    
+    .content {
+        display: grid;
+        grid-template-columns: 275px 275px 275px 275px 275px;
+        grid-template-rows: 400px 400px;
+        grid-gap: 10px;
+        padding-bottom: 250px !important;
+    }
+    
+    .item-landscape {
+        max-width: 275px;
+        max-height: 400px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .item-potrait {
+        max-width: 275px;
+        max-height: 400px;
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+    }
+    
+    .img-section {
+        background: none;
+    }
+    
+    .user-avatar {
+        border-radius: 50%;
+        padding: 25px 0;
+        width: 50px;
+    }
+    
+    .post {
+        padding: 10px 0;
+        font-family: Poppins;
+    }
+    
+    #content-favorite {
+        float: right;
+        padding: 0 25px;
+    }
+    
+    .content-favorite {
+        display: grid;
+        grid-template-columns: 275px 275px 275px 275px 275px;
+        grid-template-rows: 400px 400px;
+        grid-gap: 10px;
+    }
+    
+    .item-landscape {
+        max-width: 275px;
+        max-height: 400px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .item-potrait {
+        max-width: 275px;
+        max-height: 400px;
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+    }
+    
+    .img-section {
+        background: none;
+    }
+    
+    .post-fav {
+        padding: 10px 0;
+        font-family: Poppins;
+    }
+}
