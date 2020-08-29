@@ -66,19 +66,13 @@ class PostView(ListView):
 def DetailView(request, post_id):
     
     q = request.GET.get('tags')
-    if q:
-        for tag in q.split(' '):
-            posts = Post.objects.filter(tags__name=tag)
 
-        iterator = iter(posts)
-        post = get_object_or_404(posts, post_id=iterator.post_id)
-    else:
-        post = get_object_or_404(Post, post_id=post_id)
+    post = get_object_or_404(Post, post_id=post_id)
     tags = []
     for t in post.tags.all():
         tags.append(t)
 
-
+    # Comment
     # Comment is ready. You only need to call it in the template
     comments = post.comments.all()
     new_comment = None
@@ -90,13 +84,8 @@ def DetailView(request, post_id):
             new_comment.save()
             comment_form = CommentForm()
     else:
-        comment_form = CommentForm()
-    
-    #if q:
-     #   for tag in q.split(' '):
-      #      posts = Post.objects.all().filter(tags__name=tag)
-
-       # context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q, 'posts':posts}
+        comment_form = CommentForm()    
+    # End of Comment
 
     context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q}
 
@@ -132,4 +121,26 @@ def upload_view(request):
     return render(request, template_name, {
         'upload_form':upload_form,
         'uploaded':uploaded,
+    })
+
+
+@login_required
+def edit(request, id=None, template_name='edit.html'):
+    q = request.GET.get('post')
+    if q:
+        post = get_object_or_404(Post, post_id=id)
+        if post.uploader.id != request.user:
+            return HttpResponseForbidden()
+    else:
+        article = Post(uploader__id=request.user)
+
+    form = UploadForm(request.POST or None, instance=post)
+    if request.POST and form.is_valid():
+        form.save()
+
+        redirect_url = reverse('index')
+        return redirect(redirect_url)
+
+    return render(request, template_name, {
+        'form': form
     })

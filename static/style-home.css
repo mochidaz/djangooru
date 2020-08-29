@@ -1,3 +1,4 @@
+
 body {
     overflow-x: hidden;
     background: #f8f9fa !important;
@@ -79,6 +80,7 @@ body {
     max-height: 400px;
     width: 100%;
     height: 100%;
+    text-align: center;
     object-fit: cover;
 }
 
@@ -128,4 +130,132 @@ body {
 .pagination {
     justify-content: center;
     padding: 20px 0;
+}
+
+
+@media (max-width: 800px) {
+    body {
+        overflow-x: hidden;
+        background: #f8f9fa !important;
+    }
+    
+    .nav-item {
+        font-size: 20px;
+        padding-left: 45px;
+    }
+    
+    .navbar-brand {
+        font-size: 32px !important;
+        font-family: Poppins;
+    }
+    
+    .bottom-navbar {
+        background: lightblue;
+    }
+    
+    .z-index-2 {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .sidebar {
+        background: #f7f5fa;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        float: left;
+        bottom: 0;
+    }
+    
+    .sidebar-content {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .tag-icon {
+        padding: 0 20px;
+    }
+    
+    .no-list-style {
+        list-style-type: none;
+    }
+    
+    .tag-place {
+        padding: 15px;
+        padding-bottom: 80px;
+    }
+    
+    .sidebar-content h2 {
+        padding: 10px 20px;
+    }
+    
+    .search-btn {
+        border: none;
+        background: none;
+    }
+    
+    #content {
+        float: left;
+        padding-bottom:30%;
+    }
+    
+    .content {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-template-rows: repeat(3, auto); 
+        grid-gap: 5px;
+    }
+    
+    .item-landscape {
+        max-width: auto;
+        max-height: auto;
+        object-fit: cover;
+    }
+   /* 
+    * Gonna be used later??
+    .item-potrait {
+        width: 175px;
+        height: 175px;
+        overflow:hidden;
+    }
+    */
+    .img-section {
+        background: none;
+    }
+    
+    .user-section {
+        color: #acacac;
+    }
+    
+    .page {
+        display: inline-block;
+        padding: 5px 9px;
+        margin-right: 4px;
+        border-radius: 3px;
+        border: solid 1px #c0c0c0;
+        background: #e9e9e9;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #717171;
+        text-transform: capitalize;
+    }
+    
+    .page:hover {
+        text-decoration: none;
+        background: lightblue;
+    }
+    
+    .pagination-title {
+        font-family: Poppins;
+    }
+    
+    .pag {
+        padding-top: 750px;
+    }
+    
+    .pagination {
+        justify-content: center;
+        padding: 20px 0;
+    }
 }
