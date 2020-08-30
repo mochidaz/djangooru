@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
+from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404, reverse
 from django.db.models import Q, Count
 from django.views.generic import ListView, TemplateView
 from django.core.paginator import Paginator
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from taggit.models import Tag
+
 
 from .models import Post, Comment
 from .forms import CommentForm, UploadForm
@@ -66,8 +67,8 @@ class PostView(ListView):
 def DetailView(request, post_id):
     
     q = request.GET.get('tags')
-
     post = get_object_or_404(Post, post_id=post_id)
+
     tags = []
     for t in post.tags.all():
         tags.append(t)
@@ -125,14 +126,15 @@ def upload_view(request):
 
 
 @login_required
-def edit(request, id=None, template_name='edit.html'):
+def edit(request, id=None):
+    template_name = 'posts/edit.html'
     q = request.GET.get('post')
     if q:
-        post = get_object_or_404(Post, post_id=id)
-        if post.uploader.id != request.user:
+        post = get_object_or_404(Post, post_id=q)
+        if post.uploader != request.user:
             return HttpResponseForbidden()
     else:
-        article = Post(uploader__id=request.user)
+        post = get_object_or_404(Post, post_id=id)
 
     form = UploadForm(request.POST or None, instance=post)
     if request.POST and form.is_valid():
@@ -142,5 +144,20 @@ def edit(request, id=None, template_name='edit.html'):
         return redirect(redirect_url)
 
     return render(request, template_name, {
-        'form': form
+        'form': form,
+        'q':q,
     })
+
+def delete_view(request):
+
+    template_name = 'posts/delete.html'
+    q = request.GET.get("post")
+    if request.method == 'POST':
+        if q:
+            post = get_object_or_404(Post, post_id=q)
+            if request.user == post.uploader:
+                post.delete()
+            else:
+                return HttpResponseForbidden()
+
+    return render(request, template_name, {'q':q})

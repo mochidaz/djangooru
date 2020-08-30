@@ -10,6 +10,10 @@
 <!-- Post -->
 {% load taggit_templatetags2_tags %}
 {% block content %}
+
+{% if user.id == post.uploader.id %}
+<a class="btn btn-primary" href="{% url 'edit' %}?post={{ post.post_id }}">Edit</a>
+{% endif %}
 <p>Image is resized. <a href="{{ post.image.url }}">View original</a></p>
 <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" style="max-height:900px; max-width:900px;"></a>
 <!-- End of Post -->

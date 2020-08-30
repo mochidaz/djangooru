@@ -13,7 +13,11 @@
   <a href="{% url 'index' %}"><h3>Posts</h3></a>
   <div class="bg-light content" id="content">
 	  {% for post in page_obj %}
-    <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
+	  {% if q %}
+	  <a href="{% url 'post_detail' post.post_id %}?tags={{ q }}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
+	  {% else %}
+	  <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
+	  {% endif %}
     {% endfor %}
   </div>
   <!-- End of content -->
