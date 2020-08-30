@@ -3,10 +3,16 @@
         <!-- Sidebar Content -->
         <div class="sidebar-content">
             <ul class="status-place">
-                <h2 class="stat-title"><b>User Status</b></h2>
+                <h2 class="stat-title"><b>User Info</b></h2>
+
+		<li class="u-stat no-list-style"><p>Username: <b class="u-stat-item">{{ user }}</b></p></li>
+
 		<li class="u-stat no-list-style"><p>User ID: <b class="u-stat-item">{{ user.id }}</b></p></li>
 		<li class="u-stat no-list-style"><p>Join Date: <b class="u-stat-item">{{ user.date_joined }}</b></p></li>
 		<li class="u-stat no-list-style"><p>Posts: <b class="u-stat-item">{{ posts.count }}</b></p></li>
+		{% if user.id == request.user.id %}
+		<li class="u-stat no-list-style"><a type="button" class="btn btn-primary" href="{% url 'logout'  %}">Logout<b class="u-stat-item"></b></a></li>
+		{% endif %}
             </ul>
         </div>
         <!-- End of Sidebar Content -->
