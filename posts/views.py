@@ -53,19 +53,25 @@ class PostView(ListView):
         self.q = self.request.GET.get('tags')
         self.q2 = self.request.GET.get('user')
         self.q3 = self.request.GET.get('artist')
+        self.query = self.q
+
         if self.q:
+
+            self.q = [i for i in self.q.split(' ') if i != '']
             self.results = Post.objects.all()
-            for tag in self.q.split(' '): 
+            for tag in self.q:
                 self.results = self.results.filter(tags__name=tag)
+
+            if not self.results.exists():
+
+                self.results = Post.objects.all()
+                self.results = self.results.filter(artist=self.query)
+                self.results = check_duplicate(self.results)
 
         if self.q2:
             self.results = Post.objects.all()
             self.results = self.results.filter(uploader__id=self.q2)
 
-            self.results = check_duplicate(self.results)
-        if self.q3:
-            self.results = Post.objects.all()
-            self.results = self.results.filter(artist=self.q3)
             self.results = check_duplicate(self.results)
 
         return self.results
@@ -79,6 +85,7 @@ class PostView(ListView):
 
         context['tag'] = tags
         context['q'] = self.q
+        context['query'] = self.query # If i use q in templates, it will appears with brackets. So i will have to create another variable like this
         return context
 
 

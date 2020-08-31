@@ -14,7 +14,7 @@
   <div class="bg-light content" id="content">
 	  {% for post in page_obj %}
 	  {% if q %}
-	  <a href="{% url 'post_detail' post.post_id %}?tags={{ q }}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
+	  <a href="{% url 'post_detail' post.post_id %}?tags={{ query }}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
 	  {% else %}
 	  <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="" class="item-landscape"></a>
 	  {% endif %}
