@@ -1,9 +1,9 @@
 # Djangooru
 Danbooru-like taggable image board written in django
 ### Post View
-![ss1](Screenshots/ss-index.png)
+![ss1](Screenshots/ss-index-updated.png)
 ### Detailed View
-![ss2](Screenshots/ss-detail.png)
+![ss2](Screenshots/ss-detail-updated.png)
 
 ## Installation
 1. Clone the repo
