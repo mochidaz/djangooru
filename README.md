@@ -5,6 +5,9 @@ Danbooru-like taggable image board written in django
 ### Detailed View
 ![ss2](Screenshots/ss-detail-updated.png)
 
+## DISCLAIMER!
+The images featured in those screenshots aren't mine! See [Image Sources]("imagesources.md") for the sources!
+
 ## Installation
 1. Clone the repo
 2. run `pip install -r requirements.txt` 
