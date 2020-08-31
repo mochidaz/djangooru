@@ -4,10 +4,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from posts.views import TagView, IndexView
+from posts.serializers import router
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
+    path('api/', include("api.urls")),
+    path('api-auth/', include('rest_framework.urls', namespace="rest_framework")),
     path('posts/', include('posts.urls')),
     path('users/', include('accounts.urls')),
     #path('tags/', TagList, name="taglist"),

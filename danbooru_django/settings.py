@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'taggit',
     'django_userforeignkey',
     'taggit_templatetags2',
+    'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +83,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 
 LANGUAGE_CODE = 'en-us'

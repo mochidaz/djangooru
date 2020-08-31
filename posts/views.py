@@ -4,12 +4,24 @@ from django.views.generic import ListView, TemplateView
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
+from rest_framework import generics
 from taggit.models import Tag
 
 
+from .serializers import PostSerializer
 from .models import Post, Comment
 from .forms import CommentForm, UploadForm
 from .utils import check_duplicate, filter_tags
+
+
+class PostList(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class PostDetail(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 class IndexView(ListView):
@@ -40,6 +52,7 @@ class PostView(ListView):
     def get_queryset(self):
         self.q = self.request.GET.get('tags')
         self.q2 = self.request.GET.get('user')
+        self.q3 = self.request.GET.get('artist')
         if self.q:
             self.results = Post.objects.all()
             for tag in self.q.split(' '): 
@@ -49,6 +62,10 @@ class PostView(ListView):
             self.results = Post.objects.all()
             self.results = self.results.filter(uploader__id=self.q2)
 
+            self.results = check_duplicate(self.results)
+        if self.q3:
+            self.results = Post.objects.all()
+            self.results = self.results.filter(artist=self.q3)
             self.results = check_duplicate(self.results)
 
         return self.results
@@ -64,10 +81,22 @@ class PostView(ListView):
         context['q'] = self.q
         return context
 
+
 def DetailView(request, post_id):
     
     q = request.GET.get('tags')
     post = get_object_or_404(Post, post_id=post_id)
+    a = Post.objects.values("artist").order_by("artist").annotate(Count("artist"))
+    artist_name = []
+    artist_art_count = []
+    for k in a:
+        artist_name.append(k.get("artist"))
+        artist_art_count.append(k.get("artist__count"))
+    b = dict(zip(artist_name, artist_art_count))
+    for k, v in b.items():
+        if k == post.artist:
+            artist = k
+            count = v
 
     tags = []
     for t in post.tags.all():
@@ -88,9 +117,10 @@ def DetailView(request, post_id):
         comment_form = CommentForm()    
     # End of Comment
 
-    context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q}
+    context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q, 'artist':artist, 'count':count}
 
     return render(request, 'posts/post_detail.html', context)
+
 
 def TagView(request, tags):
     q = request.GET.get('tags')
