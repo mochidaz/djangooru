@@ -29,8 +29,8 @@
     <span class="step-links">
     {% if q %}
         {% if page_obj.has_previous %}
-            <a href="?tags={{ q }}&page=" class="page">&laquo; first</a>
-            <a href="?tags={{ q }}&page={{ page_obj.previous_page_number }}" class="page">previous</a>
+            <a href="?tags={{ query }}&page=" class="page">&laquo; first</a>
+            <a href="?tags={{ query }}&page={{ page_obj.previous_page_number }}" class="page">previous</a>
         {% endif %}
 
         <span class="current">
@@ -38,8 +38,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?tags={{ q }}&page={{ page_obj.next_page_number }}" class="page">next</a>
-            <a href="?tags={{ q }}&page={{ page_obj.paginator.num_pages }}" class="page">last &raquo;</a>
+            <a href="?tags={{ query }}&page={{ page_obj.next_page_number }}" class="page">next</a>
+            <a href="?tags={{ query }}&page={{ page_obj.paginator.num_pages }}" class="page">last &raquo;</a>
         {% endif %}
         {% else %}
                 {% if page_obj.has_previous %}

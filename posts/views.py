@@ -53,7 +53,7 @@ class PostView(ListView):
         self.q = self.request.GET.get('tags')
         self.q2 = self.request.GET.get('user')
         self.q3 = self.request.GET.get('artist')
-        self.query = self.q
+        self.query = self.request.GET.get('tags')
 
         if self.q:
 
