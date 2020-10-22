@@ -1,40 +1,28 @@
-{% extends 'main/base.html' %} {% block body_block %} {% load static %}
+{% extends 'main/base.html' %} {% load static %}
+
+<!-- Post -->
+{% load taggit_templatetags2_tags %}
 
 {% block sidebar %}
 
 {% include 'main/sidebar.html' %}
 
 {% endblock sidebar %}
-
-
-<!-- Post -->
-{% load taggit_templatetags2_tags %}
 {% block content %}
 
 <style>
 
 .detail-img {
 	display:block;
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:30px;
-	max-height: 900px;
-	max-width: 900px;
+	margin:auto;
+	object-fit:cover;
+	max-height: 100%;
+	max-width: 100%;
 }
 
-@media (max-width:800px) {
-	
-.detail-img {
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:30px;
-	max-width: auto;
-	max-height: auto;
- }
-}
 </style>
 
+<p>Image is resized. <a href="{{ post.image.url }}">View Original</a></p>
 <a href="{% url 'post_detail' post.post_id %}"><img src="{{ post.image.url }}" alt="img" class="detail-img"></a>
 <!-- End of Post -->
 
@@ -46,12 +34,12 @@
 		{% if q %}
 {% if next_post  %}
     <li class="previous">
-	    <a href="{% url 'post_detail' next_post.post_id %}?tags={{ q }}">&larr;Next Post</a>
+	    <a href="{% url 'post_detail' next_post.post_id %}?tags={{ q2 }}">&larr;Next Post</a>
             </li>
         {% endif %}
         {% if previous_post %}
             <li class="next">
-		    <a href="{% url 'post_detail' previous_post.post_id %}?tags={{ q }}">Previous Post&rarr;</a>
+		    <a href="{% url 'post_detail' previous_post.post_id %}?tags={{ q2 }}">Previous Post&rarr;</a>
             </li>
         {% endif %}
 
@@ -73,6 +61,5 @@
 </div>
 <!-- End of Pagination -->
 
-
 {% endblock content %}
-{% endblock body_block %}
+

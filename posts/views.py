@@ -92,11 +92,21 @@ class PostView(ListView):
 def DetailView(request, post_id):
     
     q = request.GET.get('tags')
+    q2 = request.GET.get('tags')
     post = get_object_or_404(Post, post_id=post_id)
 
-    next_post = Post.objects.filter(tags__name=q, post_id__gt=post.post_id).order_by('post_id').first()
+    if q:
 
-    previous_post = Post.objects.filter(tags__name=q,post_id__lt=post.post_id).order_by('-post_id').first()
+        q = [i for i in q.lower().split(' ') if i != '']
+        
+        for tag in q:
+            next_post = Post.objects.filter(tags__name=tag, post_id__gt=post.post_id).order_by('post_id').first()
+
+            previous_post = Post.objects.filter(tags__name=tag,post_id__lt=post.post_id).order_by('-post_id').first()
+    
+    else:
+        previous_post = None
+        next_post = None
 
     artist = len(Post.objects.filter(artist=post.artist))
 
@@ -119,7 +129,7 @@ def DetailView(request, post_id):
         comment_form = CommentForm()    
     # End of Comment
 
-    context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q, 'artist':artist, 'next_post':next_post, 'previous_post':previous_post}
+    context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q, 'artist':artist, 'next_post':next_post, 'previous_post':previous_post ,'q2':q2}
 
     return render(request, 'posts/post_detail.html', context)
 

@@ -1,9 +1,8 @@
-{% block sidebar %}
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
 
-  <h3 style="padding:30px;padding-top:9px; padding-bottom:5px;"><b>Search</b></h3>
+  <h3 style="padding:5px;padding-top:9px; padding-bottom:5px;"><b>Search</b></h3>
     <!-- Sidebar Content -->
     <div class="sidebar-content">
       <!-- Search form -->
@@ -41,7 +40,7 @@
 
 		<li class="info-txt no-list-style"><p>Artist: <a href="{% url 'posts' %}?tags={{ post.artist }}" class="info-item">{{ post.artist }}</a> {{ artist }}</p></li>
 
-		<li class="info-txt no-list-style"><p>Source: <b class="info-item"><a href="{{ post.source }}">{{ post.source }}</a></b></p></li>
+		<li class="info-txt no-list-style"><p>Source: <b class="info-item"><a style="word-break:break-word" href="{{ post.source }}">{{ post.source }}</a></b></p></li>
 
 		<li class="info-txt no-list-style"><p>Date Posted: <b class="info-item">{{ post.published }}</b></p></li>
 
@@ -56,4 +55,3 @@
     </div>
   </div>
   <!-- End of Sidebar -->
- {% endblock %}
