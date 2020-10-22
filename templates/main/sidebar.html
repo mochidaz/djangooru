@@ -39,7 +39,7 @@
 		<li class="info-txt no-list-style"><p>Uploader: <b class="info-item"><a href="{% url 'dashboard' post.uploader.id %}">{{ post.uploader }}</a></b></p></li>
 		<li class="info-txt no-list-style"><p>Post ID: <b class="info-item">{{ post.post_id }}</b></p></li>
 
-		<li class="info-txt no-list-style"><p>Artist: <a href="{% url 'posts' %}?tags={{ artist }}" class="info-item">{{ post.artist }}</a> {{ count }}</p></li>
+		<li class="info-txt no-list-style"><p>Artist: <a href="{% url 'posts' %}?tags={{ post.artist }}" class="info-item">{{ post.artist }}</a> {{ artist }}</p></li>
 
 		<li class="info-txt no-list-style"><p>Source: <b class="info-item"><a href="{{ post.source }}">{{ post.source }}</a></b></p></li>
 

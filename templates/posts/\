@@ -46,12 +46,12 @@
 		{% if q %}
 {% if next_post  %}
     <li class="previous">
-	    <a href="{% url 'post_detail' next_post.post_id %}?tags={{ q }}">&larr;Next Post</a>
+	    <a href="{% url 'post_detail' next_post.get_next_by_published.post_id %}?tags={{ q }}">&larr;Next Post</a>
             </li>
         {% endif %}
         {% if previous_post %}
             <li class="next">
-		    <a href="{% url 'post_detail' previous_post.post_id %}?tags={{ q }}">Previous Post&rarr;</a>
+		    <a href="{% url 'post_detail' previous_post.get_previous_by_published.post_id %}?tags={{ q }}">Previous Post&rarr;</a>
             </li>
         {% endif %}
 

@@ -21,9 +21,9 @@ class Post(models.Model):
         return f"Post #{self.post_id}"
 
 
-class Favorite(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    favorite = models.ManyToManyField(Post)
+#class Favorite(models.Model):
+#    user = models.OneToOneField(User, on_delete=models.CASCADE)
+#    favorite = models.ManyToManyField(Post)
 
 
 class Comment(models.Model):

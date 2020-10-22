@@ -6,7 +6,7 @@ SECRET_KEY = 'XXXX'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'taggit_templatetags2',
     'api',
     'rest_framework',
+    'taggit_serializer',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -111,4 +113,6 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 

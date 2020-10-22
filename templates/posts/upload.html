@@ -1,9 +1,16 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+{% if uploaded %}
+<div class="alert alert-success">
+  <strong>Success!</strong> Upload was successful.
+</div>
+{% endif %}
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
+
 {{ upload_form.as_p }}
-<button value="upload" type="submit">Upload</button>
+
+<button value="upload" class="btn btn-primary" type="submit">Upload</button>
 </form>
 {% endblock %}

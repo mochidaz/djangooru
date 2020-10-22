@@ -57,7 +57,7 @@ class PostView(ListView):
 
         if self.q:
 
-            self.q = [i for i in self.q.split(' ') if i != '']
+            self.q = [i for i in self.q.lower().split(' ') if i != '']
             self.results = Post.objects.all()
             for tag in self.q:
                 self.results = self.results.filter(tags__name=tag)
@@ -93,17 +93,12 @@ def DetailView(request, post_id):
     
     q = request.GET.get('tags')
     post = get_object_or_404(Post, post_id=post_id)
-    a = Post.objects.values("artist").order_by("artist").annotate(Count("artist"))
-    artist_name = []
-    artist_art_count = []
-    for k in a:
-        artist_name.append(k.get("artist"))
-        artist_art_count.append(k.get("artist__count"))
-    b = dict(zip(artist_name, artist_art_count))
-    for k, v in b.items():
-        if k == post.artist:
-            artist = k
-            count = v
+
+    next_post = Post.objects.filter(tags__name=q, post_id__gt=post.post_id).order_by('post_id').first()
+
+    previous_post = Post.objects.filter(tags__name=q,post_id__lt=post.post_id).order_by('-post_id').first()
+
+    artist = len(Post.objects.filter(artist=post.artist))
 
     tags = []
     for t in post.tags.all():
@@ -124,7 +119,7 @@ def DetailView(request, post_id):
         comment_form = CommentForm()    
     # End of Comment
 
-    context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q, 'artist':artist, 'count':count}
+    context = {'post':post, 'tag':tags, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form, 'q':q, 'artist':artist, 'next_post':next_post, 'previous_post':previous_post}
 
     return render(request, 'posts/post_detail.html', context)
 
@@ -151,6 +146,7 @@ def upload_view(request):
         if upload_form.is_valid():
             upload_form = upload_form.save()
             uploaded = True
+            upload_form = UploadForm()
         else:
             print(upload_form.errors)
             return HttpResponse('Invalid post details')
