@@ -3,7 +3,8 @@
 ## First row
 
 - https://www.pixiv.net/en/artworks/82361819
-- https://twitter.com/i/web/status/1184084602714906630- https://www.pixiv.net/en/artworks/75554307
+- https://twitter.com/i/web/status/1184084602714906630
+- https://www.pixiv.net/en/artworks/75554307
 - https://www.pixiv.net/en/artworks/83197666
 - https://www.pixiv.net/en/artworks/64871618
 
@@ -17,7 +18,8 @@
 
 ## Third row
 
-- https://twitter.com/i/web/status/1265120542920716295- https://www.pixiv.net/en/artworks/83868823
+- https://twitter.com/i/web/status/1265120542920716295
+- https://www.pixiv.net/en/artworks/83868823
 - https://www.pixiv.net/en/artworks/83969390
 - https://www.pixiv.net/en/artworks/72485852
 - https://www.pixiv.net/en/artworks/77839722
