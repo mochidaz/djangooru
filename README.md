@@ -28,6 +28,8 @@ The images featured in those screenshots aren't mine! See [Image Sources](images
 - ~~Make the search bar works~~
 - ~~Make the search bar works __Globally__~~
 - ~~Create better design (I'd be really happy if someone could contribute to this)~~ (Almost done thanks to [this guy](https://github.com/DaNoobBoii) :) )
-- Make next/before on post detail works with tags
-- Responsive grid
+- ~~Make next/before on post detail works with tags~~
+- Responsive grid (Almost done)
 - API with djangorestframework
+- Pools
+- Favorite feature
