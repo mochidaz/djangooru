@@ -63,9 +63,9 @@ WSGI_APPLICATION = 'danbooru_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'XXXX',
-        'USER': 'XXXX',
-        'PASSWORD': 'XXXX',
+        'NAME': 'danboorudb',
+        'USER': 'rahman',
+        'PASSWORD': 'AlMulk78',
     }
 }
 
