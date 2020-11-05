@@ -100,9 +100,9 @@ def DetailView(request, post_id):
         q = [i for i in q.lower().split(' ') if i != '']
         
         for tag in q:
-            next_post = Post.objects.filter(tags__name=tag, post_id__gt=post.post_id).order_by('post_id').first()
+            next_post = Post.objects.filter(Q(tags__name=tag) | Q(artist=tag), post_id__gt=post.post_id).order_by('post_id').first()
 
-            previous_post = Post.objects.filter(tags__name=tag,post_id__lt=post.post_id).order_by('-post_id').first()
+            previous_post = Post.objects.filter(Q(tags__name=tag) | Q(artist=tag),post_id__lt=post.post_id).order_by('-post_id').first()
     
     else:
         previous_post = None

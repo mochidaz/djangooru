@@ -37,4 +37,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment {self.comment} by {self.name}'
-    
+   
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ManyToManyField(Post)
+
