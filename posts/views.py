@@ -30,7 +30,6 @@ class IndexView(ListView):
     results = model.objects.order_by('-published')
     template_name = 'main/index.html'
     
-    # In order to test the pagination, i'll set a post limit for each page. 3 posts each page
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(results=self.results, **kwargs)
@@ -48,7 +47,6 @@ class PostView(ListView):
     results = model.objects.order_by('-published')
     template_name = 'main/index.html'
     
-    # In order to test the pagination, i'll set a post limit for each page. 3 posts each page
     def get_queryset(self):
         self.q = self.request.GET.get('tags')
         self.q2 = self.request.GET.get('user')
@@ -61,11 +59,15 @@ class PostView(ListView):
             self.results = Post.objects.all()
             exc = []
             for tag in self.q:
+
+                # Exclude tags if it starts with "-"
                 if tag.startswith("-"):
                     exc.append(tag.strip("-"))
 
-                    self.results = self.results.exclude(tags__name__in=exc)
+                    self.results = self.results.exclude(Q(tags__name__in=exc) | Q(artist__in=exc))
                 else:
+
+                    # If excluded list not none
                     if exc != []:
                         self.results = self.results.exclude(tags__name__in=exc).filter(tags__name=tag)
                     else:
