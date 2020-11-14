@@ -59,8 +59,17 @@ class PostView(ListView):
 
             self.q = [i for i in self.q.lower().split(' ') if i != '']
             self.results = Post.objects.all()
+            exc = []
             for tag in self.q:
-                self.results = self.results.filter(tags__name=tag)
+                if tag.startswith("-"):
+                    exc.append(tag.strip("-"))
+
+                    self.results = self.results.exclude(tags__name__in=exc)
+                else:
+                    if exc != []:
+                        self.results = self.results.exclude(tags__name__in=exc).filter(tags__name=tag)
+                    else:
+                        self.results = self.results.filter(tags__name=tag)
 
             if not self.results.exists():
 
